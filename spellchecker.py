@@ -16,19 +16,45 @@ class SpellChecker:
         end = time.time()
 
         errors = []
-
         for r in result:
-            if not r.corretta == True:
+            if not r.corretta:
                 errors.append(str(r))
 
         print("-----------------------------")
+        print("Using contains")
 
         for e in errors:
             print(e)
 
-        print(f"\nNumero errori: {len(errors)}")
         print(f"Time elapsed: {end - start}")
+
+        #LINEAR SEARCH
+        start = time.time()
+        result = self.multiDict.searchWordLinear(words, language)
+        end = time.time()
+
         print("-----------------------------")
+        print("Using Linear search")
+
+        for r in result:
+            if not r.corretta:
+                print(r)
+
+        print(f"Time elapsed: {end - start}")
+
+        #DICHOTOMIC SEARCH
+        start = time.time()
+        result = self.multiDict.searchWordDichotomic(words, language)
+        end = time.time()
+
+        print("-----------------------------")
+        print("Using Dichotomic search")
+
+        for r in result:
+            if not r.corretta:
+                print(r)
+
+        print(f"Time elapsed: {end - start}")
 
     def printMenu(self):
         print("______________________________\n" +

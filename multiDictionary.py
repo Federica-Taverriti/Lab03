@@ -37,3 +37,48 @@ class MultiDictionary:
             result.append(rich)
 
         return result
+
+    #RICERCA LINEARE
+    def searchWordLinear(self, words, language):
+        result = []
+        dictionary = self.dictionaries[language].dict
+
+        for w in words:
+            rich = rw.RichWord(w)
+            found = False
+            for dword in dictionary:
+                if dword == w:
+                    found = True
+                    break
+
+            rich.corretta = found
+            result.append(rich)
+        return result
+
+    #RICERCA DICOTOMICA (da metà)
+    def searchWordDichotomic(self, words, language):
+        result = []
+        dictionary = self.dictionaries[language].dict
+
+        for w in words:
+            rich = rw.RichWord(w)
+
+            left = 0
+            right = len(dictionary)-1
+            found = False
+
+            while left <= right:
+                mid = (left+right)//2
+
+                if dictionary[mid] == w:
+                    found = True
+                    break
+                elif dictionary[mid] < w:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+
+            rich.corretta = found
+            result.append(rich)
+
+        return result
