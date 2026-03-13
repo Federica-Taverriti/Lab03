@@ -28,5 +28,3 @@ while(True):
 
     if int(txtIn) == 4:
         break
-
-
